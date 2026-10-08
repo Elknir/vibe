@@ -219,7 +219,7 @@ export function HotkeyProvider({ children }: { children: ReactNode }) {
 				resultText = hotkeyNormalizeOutputRef.current ? transcript.normalizeWhitespace(resultText) : resultText.trim()
 				// Output result
 				if (hotkeyOutputModeRef.current === 'type') {
-					await invoke('type_text', { text: resultText })
+					await invoke('type_text', { text: resultText.replace(/\n/g, ' ') })
 				} else {
 					await clipboard.writeText(resultText)
 					await notify('Vibe', m.hotkeyTranscriptionCopied())
